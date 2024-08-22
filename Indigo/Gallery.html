@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .card-container {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .card {
+        width: 80%;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        padding: 20px;
+        margin: 20px;
+      }
+      .slider {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+      }
+      .slide img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .dots {
+        text-align: center;
+        margin: 10px 0;
+      }
+      .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+        cursor: pointer;
+      }
+      .dot.active {
+        background-color: #717171;
+      }
+      .card-section {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        width: 150px;
+        height: 250px;
+      }
+      .image-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "card-section card-section "
+          "img4 img3";
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .image-grid img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .image-grid .img1 {
+        grid-area: img1;
+      }
+      .image-grid .img2 {
+        grid-area: img2;
+      }
+      .image-grid .img3 {
+        grid-area: img3;
+        width: auto;
+        height: 410px;
+      }
+      .image-grid .img4 {
+        grid-area: img4;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card">
+        <div class="slider">
+          <div class="slides">
+            <div class="slide">
+              <img
+                src="	https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/sale/inde_sale_Mweb.png"
+                alt="Image 1"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/Stretch_hp_Web_2x.png"
+                alt="Image 2"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/Bluchip-Web.jpg"
+                alt="Image 3"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/banner/Hotel-web-banner_1.jpg"
+                alt="Image 4"
+              />
+            </div>
+          </div>
+          <div class="dots">
+            <span class="dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+          </div>
+        </div>
+        <div class="image-grid">
+          <div class="card-section">
+            <p>
+              <strong>Flat 15% discount</strong> on 6E add-ons like seat
+              selection, excess baggage, and more. <br />
+              Expiry: 15 August 2024
+            </p>
+          </div>
+          <div class="card-section">
+            <p>
+              <strong>Up to 6% 6E Rewards</strong> using co-brand credit cards.
+              <br />
+              Expiry: 29 March 2025
+            </p>
+          </div>
+          <img
+            src="https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/web-second-banner.svg"
+            alt="Image 2"
+            class="img3"
+          />
+          <div class="img4">
+            <img
+              src="https://www.goindigo.in/content/dam/s6web/in/en/assets/homepage/new_banners/hotel-final.jpg"
+              alt="Hotel Offer"
+            />
+            <p style="position: fixed; bottom: 5px; color: black">
+              Flat 25% off* book hotels on goIndiGo.in <br />
+              Use code: STAY4U
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let currentIndex = 0;
+      const slides = document.querySelector(".slides");
+      const dots = document.querySelectorAll(".dot");
+
+      function showSlide(index) {
+        const totalSlides = slides.children.length;
+        if (index >= totalSlides) currentIndex = 0;
+        if (index < 0) currentIndex = totalSlides - 1;
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot) => dot.classList.remove("active"));
+        dots[currentIndex].classList.add("active");
+      }
+      function currentSlide(index) {
+        currentIndex = index;
+        showSlide(currentIndex);
+      }
+      setInterval(() => {
+        currentIndex++;
+        showSlide(currentIndex);
+      }, 3000);
+    </script>
+  </body>
+</html>
